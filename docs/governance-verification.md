@@ -8,21 +8,21 @@ Terraform creates **policy assignments at the Resource Group scope**:
 
 - **Allowed locations** (deny deployments outside an approved region list)
   - Policy definition ID: `e56962a6-4747-49cd-b67b-bf8b01975c4c`
-  - Assignment: `azurerm_resource_group_policy_assignment.allowed_locations` in `/Users/chasejamieson/Documents/resume/azure-ops-ready-webapp/infra/governance.tf`
+  - Assignment: `azurerm_resource_group_policy_assignment.allowed_locations` in `/azure-ops-ready-webapp/infra/governance.tf`
   - Parameter: `listOfAllowedLocations = var.allowed_locations`
 - **Require tags on all resources** (deny if a tag is missing)
   - Policy definition ID: `871b6d14-10aa-478d-b590-94f262ecfa99` (“Require a tag on resources”)
-  - Assignments: `azurerm_resource_group_policy_assignment.require_tags` (one per tag) in `/Users/chasejamieson/Documents/resume/azure-ops-ready-webapp/infra/governance.tf`
-  - Required tags (from `/Users/chasejamieson/Documents/resume/azure-ops-ready-webapp/infra/locals.tf`): `owner`, `environment`, `application`
+  - Assignments: `azurerm_resource_group_policy_assignment.require_tags` (one per tag) in `/azure-ops-ready-webapp/infra/governance.tf`
+  - Required tags (from `/azure-ops-ready-webapp/infra/locals.tf`): `owner`, `environment`, `application`
 
-The approved region list is configurable (from `/Users/chasejamieson/Documents/resume/azure-ops-ready-webapp/infra/variables.tf`):
+The approved region list is configurable (from `/azure-ops-ready-webapp/infra/variables.tf`):
 
 - `allowed_locations` default: `mexicocentral, norwayeast, eastus, southcentralus, westus3`
 - `location` should be one of the `allowed_locations` entries. Terraform enforces this with a precondition on the resource group.
 
 ## How to verify (CLI)
 
-Run these from `/Users/chasejamieson/Documents/resume/azure-ops-ready-webapp/infra`.
+Run these from `/azure-ops-ready-webapp/infra`.
 
 ### 1) Get your Resource Group name
 

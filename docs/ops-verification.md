@@ -2,7 +2,7 @@
 
 This document captures proof that the deployed App Service is healthy, emits logs to Log Analytics, and has a working alert path for HTTP 5xx errors.
 
-Run commands from `/Users/chasejamieson/Documents/resume/azure-ops-ready-webapp/infra`.
+Run commands from `/azure-ops-ready-webapp/infra`.
 
 ## 1) App endpoints (functional check)
 
@@ -69,4 +69,3 @@ Terraform defines a metric alert on the App Service metric `Http5xx` with a thre
 Evidence (2026-02-23):
 - Triggered `/fail` to generate 5xx responses.
 - Received the alert email (Action Group notification), confirming end-to-end alerting works.
-

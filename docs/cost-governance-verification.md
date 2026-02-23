@@ -17,7 +17,7 @@ This project implements cost governance by provisioning a **monthly Azure Cost M
 
 ## Commands used
 
-Run from `/Users/chasejamieson/Documents/resume/azure-ops-ready-webapp/infra`:
+Run from `/azure-ops-ready-webapp/infra`:
 
 ```bash
 BUDGET="$(terraform output -raw budget_name)"
@@ -33,9 +33,9 @@ Note: Azure CLI prints `Command group 'consumption' is in preview...` for these 
 
 ## Implementation notes (Terraform)
 
-- Budget resource: `/Users/chasejamieson/Documents/resume/azure-ops-ready-webapp/infra/cost.tf`
+- Budget resource: `/azure-ops-ready-webapp/infra/cost.tf`
 - Inputs:
-  - `budget_amount`, `budget_start_date`, `budget_end_date` in `/Users/chasejamieson/Documents/resume/azure-ops-ready-webapp/infra/variables.tf`
+  - `budget_amount`, `budget_start_date`, `budget_end_date` in `/azure-ops-ready-webapp/infra/variables.tf`
 - Guardrail: Terraform includes a precondition to ensure `budget_end_date` is later than `budget_start_date` (fail fast on misconfiguration).
 
 ## Evidence (sanitized excerpt)
