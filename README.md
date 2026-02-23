@@ -2,6 +2,10 @@
 
 Small end-to-end Azure project focused on **cloud infrastructure**: governance guardrails, monitoring/logging, alerting, and cost governance.
 
+## Deployed resources (example)
+
+![Azure resources](docs/assets/azure-resources.png)
+
 ## Repository layout
 
 - `app/`
@@ -38,4 +42,3 @@ Follow the docs in `docs/` to reproduce evidence for:
 - governance (policy deny tests)
 - ops (Log Analytics logs + metric alert email)
 - cost governance (budget existence + notifications)
-
