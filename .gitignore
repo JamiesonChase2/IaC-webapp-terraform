@@ -1,0 +1,10 @@
+.DS_Store
+
+# Terraform (don’t commit state or local config)
+**/.terraform/
+**/*.tfstate
+**/*.tfstate.*
+**/crash.log
+**/crash.*.log
+**/terraform.tfvars
+
