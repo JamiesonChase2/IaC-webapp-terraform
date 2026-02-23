@@ -1,6 +1,6 @@
 # Governance Verification (Azure Policy Guardrails)
 
-This project implements **resource-group-scoped Azure Policy guardrails** (deny effects) and provides repeatable CLI-based verification steps you can run to prove the controls work.
+Implements **resource-group-scoped Azure Policy guardrails** (deny effects) and provides repeatable CLI-based verification steps.
 
 ## What was implemented
 
@@ -46,13 +46,13 @@ You should see assignments with display names similar to:
 - `Require tag 'environment' (project guardrail)`
 - `Require tag 'application' (project guardrail)`
 
-## Evidence: Negative tests (deny enforcement)
+## Example: Negative tests (deny enforcement)
 
 These two tests prove the guardrails actually block noncompliant deployments.
 
 ### Test A — Disallowed region should be denied
 
-Attempt to deploy a throwaway resource to a non-approved region:
+Attempt to deploy a resource to a non-approved region:
 
 ```bash
 RAND="$(LC_ALL=C tr -dc 'a-z0-9' </dev/urandom | head -c 12)"
@@ -73,9 +73,7 @@ Expected result: a denial similar to:
 (RequestDisallowedByAzure) ... was disallowed by Azure: This policy maintains a set of best available regions ...
 ```
 
-Note: In this environment, the region restriction is enforced by an upstream/subscription policy, which is still a realistic governance outcome and aligns with the “allowed locations” objective.
-
-### Test B — Missing required tags should be denied (even in an allowed region)
+### Test B — Missing required tags should be denied
 
 Attempt the same resource in an allowed region, but omit tags:
 
@@ -88,7 +86,7 @@ az storage account create \
   --kind StorageV2
 ```
 
-Expected result: a denial similar to:
+Result: a denial similar to:
 
 ```text
 (RequestDisallowedByPolicy) ... was disallowed by policy. Policy identifiers: ...
@@ -98,14 +96,3 @@ Expected result: a denial similar to:
 ```
 
 This proves the resource-group-level “require tags” guardrails are active and blocking untagged resources.
-
-## (Optional) Positive check: confirm tags exist on deployed resources
-
-```bash
-az resource list -g "$RG" --query "[].{name:name,type:type,tags:tags}" -o table
-```
-
-## Resume-ready framing (copy/paste)
-
-- Implemented Azure governance guardrails using Terraform + Azure Policy at resource-group scope: allowed regions + mandatory tagging (deny effects).
-- Validated guardrails with negative tests (region + missing tags) and documented evidence of enforced policy decisions.

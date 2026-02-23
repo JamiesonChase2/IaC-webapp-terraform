@@ -1,3 +1,7 @@
+/*
+Outputs are "handles" you can use for verification and scripting.
+*/
+
 output "resource_group_name" {
   description = "Name of the Azure Resource Group."
   value       = azurerm_resource_group.main.name

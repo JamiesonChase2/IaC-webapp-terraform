@@ -1,3 +1,7 @@
+/*
+Simple cloud financial controls.
+*/
+
 resource "azurerm_consumption_budget_resource_group" "monthly" {
   name              = "bud-${local.name_prefix}-${random_string.suffix.result}"
   resource_group_id = azurerm_resource_group.main.id
@@ -7,6 +11,7 @@ resource "azurerm_consumption_budget_resource_group" "monthly" {
 
   lifecycle {
     precondition {
+      # Keep the budget period sane; fails fast if dates are reversed.
       condition     = var.budget_end_date > var.budget_start_date
       error_message = "budget_end_date must be later than budget_start_date."
     }
@@ -17,7 +22,7 @@ resource "azurerm_consumption_budget_resource_group" "monthly" {
     end_date   = var.budget_end_date
   }
 
-  # Notifications based on ACTUAL spend
+  # Notifications based on ACTUAL spend (not forecast).
   notification {
     enabled        = true
     operator       = "GreaterThan"

@@ -1,3 +1,8 @@
+/*
+Inputs for this Terraform project.
+- Validations are used as "guardrails" to fail fast on common mistakes (bad email, wrong date format, etc.).
+*/
+
 variable "project_name" {
   type        = string
   description = "Application/project identifier used for naming and the 'application' tag."

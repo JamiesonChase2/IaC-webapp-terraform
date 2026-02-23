@@ -1,6 +1,6 @@
 # Ops Verification (Monitoring, Logs, Alerting)
 
-This document captures proof that the deployed App Service is healthy, emits logs to Log Analytics, and has a working alert path for HTTP 5xx errors.
+Captures proof that the deployed App Service is healthy, emits logs to Log Analytics, and has a working alert path for HTTP 5xx errors.
 
 Run commands from `/azure-ops-ready-webapp/infra`.
 
@@ -22,8 +22,6 @@ Evidence (2026-02-23):
 200
 500
 ```
-
-Note: `curl` prints `000` when it cannot complete a request (DNS/connection/TLS). If you see intermittent `000`, re-run after the app warms up:
 
 ```bash
 for i in {1..10}; do curl -s -o /dev/null -w "%{http_code}\n" "$URL/healthz"; sleep 1; done
@@ -53,8 +51,6 @@ AppServiceHTTPLogs
 | summarize Total=count(), Errors=countif(ScStatus >= 500)
 " -o table
 ```
-
-Evidence (2026-02-23):
 
 ```text
 Errors    TableName      Total
